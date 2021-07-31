@@ -8,17 +8,9 @@ import com.sbs.exam.demo.service.MemberService;
 
 @Controller
 public class UsrHomeController {
-	private MemberService memberService;
-	
-	public UsrHomeController(MemberService memberService) {
-		this.memberService = memberService;
-	}
-
-	@RequestMapping("/usr/member/doJoin")
+	@RequestMapping("/usr/home/main")
 	@ResponseBody
-	public String doJoin(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
-			String email) {
-		memberService.join(loginId, loginPw, name, nickname, cellphoneNo, email);
-		return "성공";
+	public String getString() {
+		return "안녕하세요.";
 	}
 }

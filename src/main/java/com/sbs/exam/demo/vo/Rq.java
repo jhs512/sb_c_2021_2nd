@@ -39,16 +39,7 @@ public class Rq {
 
 	public void printHistoryBackJs(String msg) {
 		resp.setContentType("text/html; charset=UTF-8");
-
-		println("<script>");
-
-		if (!Ut.empty(msg)) {
-			println("alert('" + msg + "');");
-		}
-
-		println("history.back();");
-
-		println("</script>");
+		print(Ut.jsHistoryBack(msg));
 	}
 
 	public void print(String str) {
@@ -69,5 +60,11 @@ public class Rq {
 
 	public void logout() {
 		session.removeAttribute("loginedMemberId");
+	}
+
+	public String historyBackJsOnView(String msg) {
+		req.setAttribute("msg", msg);
+		req.setAttribute("historyBack", true);
+		return "common/js";
 	}
 }

@@ -1,7 +1,6 @@
 package com.sbs.exam.demo.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,24 +60,20 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/doLogout")
 	@ResponseBody
-	public ResultData doLogout(HttpSession httpSession) {
-		boolean isLogined = false;
+	public ResultData doLogout(HttpServletRequest req) {
+		Rq rq = (Rq) req.getAttribute("rq");
 
-		if (httpSession.getAttribute("loginedMemberId") == null) {
-			isLogined = true;
-		}
-
-		if (isLogined) {
+		if (rq.isLogined()) {
 			return ResultData.from("S-1", "이미 로그아웃 상태입니다.");
 		}
 
-		httpSession.removeAttribute("loginedMemberId");
+		rq.logout();
 
 		return ResultData.from("S-2", "로그아웃 되었습니다.");
 	}
 
 	@RequestMapping("/usr/member/login")
-	public String showLogin(HttpSession httpSession) {
+	public String showLogin() {
 		return "usr/member/login";
 	}
 

@@ -31,14 +31,20 @@ public interface ArticleRepository {
 	public void modifyArticle(@Param("id") int id, @Param("title") String title, @Param("body") String body);
 
 	@Select("""
+			<script>
 			SELECT A.*,
 			M.nickname AS extra__writerName
 			FROM article AS A
 			LEFT JOIN member AS M
 			ON A.memberId = M.id
+			WHERE 1
+			<if test="boardId != 0">
+				AND A.boardId = #{boardId}
+			</if>
 			ORDER BY A.id DESC
+			</script>
 			""")
-	public List<Article> getArticles();
+	public List<Article> getArticles(@Param("boardId") int boardId);
 
 	public int getLastInsertId();
 }

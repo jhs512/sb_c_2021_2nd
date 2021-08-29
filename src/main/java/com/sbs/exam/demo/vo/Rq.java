@@ -90,6 +90,21 @@ public class Rq {
 	public String jsReplace(String msg, String uri) {
 		return Ut.jsReplace(msg, uri);
 	}
+	
+	public String getCurrentUri() {
+		String currentUri = req.getRequestURI();
+        String queryString = req.getQueryString();
+
+        if (queryString != null && queryString.length() > 0) {
+            currentUri += "?" + queryString;
+        }
+        
+        return currentUri;
+	}
+	
+	public String getEncodedCurrentUri() {
+		return Ut.getUriEncoded(getCurrentUri());
+	}
 
 	// 이 메서드는 Rq 객체가 자연스럽게 생성되도록 유도하는 역할을 한다.
 	// 지우면 안되고,

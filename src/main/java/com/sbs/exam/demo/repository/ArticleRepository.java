@@ -34,7 +34,7 @@ public interface ArticleRepository {
 	public void modifyArticle(@Param("id") int id, @Param("title") String title, @Param("body") String body);
 
 	@Select("""
-			<script>		
+			<script>
 			SELECT A.*,
 			M.nickname AS extra__writerName
 			FROM article AS A
@@ -118,4 +118,22 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int getArticleHitCount(int id);
+
+	@Update("""
+			<script>
+			UPDATE article
+			SET goodReactionPoint = goodReactionPoint + 1
+			WHERE id = #{id}
+			</script>
+			""")
+	public int increaseGoodReactionPoint(int id);
+
+	@Update("""
+			<script>
+			UPDATE article
+			SET badReactionPoint = badReactionPoint + 1
+			WHERE id = #{id}
+			</script>
+			""")
+	public int increaseBadReactionPoint(int id);
 }

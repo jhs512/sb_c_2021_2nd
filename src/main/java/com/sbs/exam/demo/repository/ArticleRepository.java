@@ -136,7 +136,7 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int increaseBadReactionPoint(int id);
-	
+
 	@Update("""
 			<script>
 			UPDATE article
@@ -145,7 +145,7 @@ public interface ArticleRepository {
 			</script>
 			""")
 	public int decreaseGoodReactionPoint(int id);
-	
+
 	@Update("""
 			<script>
 			UPDATE article

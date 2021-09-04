@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.sbs.exam.demo.repository.ReplyRepository;
 import com.sbs.exam.demo.util.Ut;
-import com.sbs.exam.demo.vo.Article;
 import com.sbs.exam.demo.vo.Member;
 import com.sbs.exam.demo.vo.Reply;
 import com.sbs.exam.demo.vo.ResultData;
@@ -70,5 +69,23 @@ public class ReplyService {
 		}
 
 		return ResultData.from("S-1", "댓글 수정이 가능합니다.");
+	}
+
+	public Reply getForPrintReply(Member actor, int id) {
+		Reply reply = replyRepository.getForPrintReply(id);
+		
+		updateForPrintData(actor, reply);
+		
+		return reply;
+	}
+
+	public ResultData deleteReply(int id) {
+		replyRepository.deleteReply(id);
+		
+		return ResultData.from("S-1", Ut.f("%d번 댓글을 삭제하였습니다.", id));
+	}
+
+	public Reply getReply(int id) {
+		return replyRepository.getReply(id);
 	}
 }

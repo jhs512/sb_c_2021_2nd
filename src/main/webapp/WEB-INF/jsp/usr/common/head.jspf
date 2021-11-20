@@ -68,7 +68,7 @@
           </a>
         </li>
         <li>
-          <a class="h-full flex px-3 items-center hover:underline" href="/usr/member/doLogout">
+          <a class="h-full flex px-3 items-center hover:underline" href="${rq.logoutUri}">
             <span>로그아웃</span>
           </a>
         </li>

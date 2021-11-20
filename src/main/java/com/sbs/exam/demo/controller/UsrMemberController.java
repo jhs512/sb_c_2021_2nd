@@ -2,6 +2,7 @@ package com.sbs.exam.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.exam.demo.service.MemberService;
@@ -73,7 +74,7 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/doLogin")
 	@ResponseBody
-	public String doLogin(String loginId, String loginPw) {
+	public String doLogin(String loginId, String loginPw, @RequestParam(defaultValue = "/") String afterLoginUri) {
 		if (Ut.empty(loginId)) {
 			return rq.jsHistoryBack("loginId(을)를 입력해주세요.");
 		}
@@ -94,7 +95,7 @@ public class UsrMemberController {
 
 		rq.login(member);
 
-		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), "/");
+		return rq.jsReplace(Ut.f("%s님 환영합니다.", member.getNickname()), afterLoginUri);
 	}
 
 	@RequestMapping("/usr/member/myPage")
@@ -117,11 +118,11 @@ public class UsrMemberController {
 		if (rq.getLoginedMember().getLoginPw().equals(loginPw) == false) {
 			return rq.jsHistoryBack("비밀번호가 일치하지 않습니다.");
 		}
-		
-		if ( replaceUri.equals("../member/modify") ) {
+
+		if (replaceUri.equals("../member/modify")) {
 			String memberModifyAuthKey = memberService.genMemberModifyAuthKey(rq.getLoginedMemberId());
-			
-			replaceUri += "?memberModifyAuthKey=" + memberModifyAuthKey; 
+
+			replaceUri += "?memberModifyAuthKey=" + memberModifyAuthKey;
 		}
 
 		return rq.jsReplace("", replaceUri);
@@ -129,32 +130,35 @@ public class UsrMemberController {
 
 	@RequestMapping("/usr/member/modify")
 	public String showModify(String memberModifyAuthKey) {
-		if ( Ut.empty(memberModifyAuthKey) ) {
+		if (Ut.empty(memberModifyAuthKey)) {
 			return rq.historyBackJsOnView("memberModifyAuthKey(이)가 필요합니다.");
 		}
-		
-		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(), memberModifyAuthKey);
-		
-		if ( checkMemberModifyAuthKeyRd.isFail() ) {
+
+		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(),
+				memberModifyAuthKey);
+
+		if (checkMemberModifyAuthKeyRd.isFail()) {
 			return rq.historyBackJsOnView(checkMemberModifyAuthKeyRd.getMsg());
 		}
-		
+
 		return "usr/member/modify";
 	}
 
 	@RequestMapping("/usr/member/doModify")
 	@ResponseBody
-	public String doModify(String memberModifyAuthKey, String loginPw, String name, String nickname, String email, String cellphoneNo) {
-		if ( Ut.empty(memberModifyAuthKey) ) {
+	public String doModify(String memberModifyAuthKey, String loginPw, String name, String nickname, String email,
+			String cellphoneNo) {
+		if (Ut.empty(memberModifyAuthKey)) {
 			return rq.jsHistoryBack("memberModifyAuthKey(이)가 필요합니다.");
 		}
-		
-		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(), memberModifyAuthKey);
-		
-		if ( checkMemberModifyAuthKeyRd.isFail() ) {
+
+		ResultData checkMemberModifyAuthKeyRd = memberService.checkMemberModifyAuthKey(rq.getLoginedMemberId(),
+				memberModifyAuthKey);
+
+		if (checkMemberModifyAuthKeyRd.isFail()) {
 			return rq.jsHistoryBack(checkMemberModifyAuthKeyRd.getMsg());
 		}
-		
+
 		if (Ut.empty(loginPw)) {
 			loginPw = null;
 		}
@@ -174,8 +178,9 @@ public class UsrMemberController {
 		if (Ut.empty(cellphoneNo)) {
 			return rq.jsHistoryBack("cellphoneNo(을)를 입력해주세요.");
 		}
-		
-		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, email, cellphoneNo);
+
+		ResultData modifyRd = memberService.modify(rq.getLoginedMemberId(), loginPw, name, nickname, email,
+				cellphoneNo);
 
 		return rq.jsReplace(modifyRd.getMsg(), "/");
 	}

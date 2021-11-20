@@ -1,39 +1,32 @@
 /* 폰트 */
 @font-face {
-  font-family: 'LotteMartDream';
+  font-family: 'GmarketSansMedium';
+  src:
+    url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+    format('woff');
+  font-weight: normal;
   font-style: normal;
-  font-weight: 400;
-  src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff') format('woff');
 }
-@font-face {
-  font-family: 'LotteMartDream';
-  font-style: normal;
-  font-weight: 700;
-  src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff') format('woff');
-}
-@font-face {
-  font-family: 'LotteMartDream';
-  font-style: normal;
-  font-weight: 300;
-  src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff') format('woff');
-}
-html > body {
- font-family: 'LotteMartDream', sans-serif;
+
+html>body, html>body .toastui-editor-contents, html>body .ProseMirror,
+  html>body .toastui-editor-md-code, html>body .toastui-editor-md-code-block
+  {
+  font-family: 'GmarketSansMedium', sans-serif;
+  text-underline-position: under;
 }
 
 /* 라이브러리 */
-.table-box-type-1 > table {
-  width:100%;
+.table-box-type-1>table {
+  width: 100%;
 }
 
-.table-box-type-1 > table th,
-.table-box-type-1 > table td {
-  border:1px solid black;
-  padding:10px;
+.table-box-type-1>table th, .table-box-type-1>table td {
+  border: 1px solid black;
+  padding: 10px;
 }
 
 .btn-text-link {
-  color:skyblue;
+  color: skyblue;
 }
 
 .btn-text-link:hover {
@@ -42,7 +35,5 @@ html > body {
 
 /* 커스텀 */
 body {
-  min-width:800px;
+  min-width: 800px;
 }
-
-

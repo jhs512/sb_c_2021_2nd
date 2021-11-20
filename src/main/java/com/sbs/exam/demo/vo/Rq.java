@@ -50,6 +50,11 @@ public class Rq {
 		this.loginedMember = loginedMember;
 	}
 
+	public void printReplaceJs(String msg, String url) {
+		resp.setContentType("text/html; charset=UTF-8");
+		print(Ut.jsReplace(msg, url));
+	}
+
 	public void printHistoryBackJs(String msg) {
 		resp.setContentType("text/html; charset=UTF-8");
 		print(Ut.jsHistoryBack(msg));
@@ -62,7 +67,7 @@ public class Rq {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public boolean isNotLogined() {
 		return !isLogined;
 	}
@@ -92,18 +97,18 @@ public class Rq {
 	public String jsReplace(String msg, String uri) {
 		return Ut.jsReplace(msg, uri);
 	}
-	
+
 	public String getCurrentUri() {
 		String currentUri = req.getRequestURI();
-        String queryString = req.getQueryString();
+		String queryString = req.getQueryString();
 
-        if (queryString != null && queryString.length() > 0) {
-            currentUri += "?" + queryString;
-        }
-        
-        return currentUri;
+		if (queryString != null && queryString.length() > 0) {
+			currentUri += "?" + queryString;
+		}
+
+		return currentUri;
 	}
-	
+
 	public String getEncodedCurrentUri() {
 		return Ut.getUriEncoded(getCurrentUri());
 	}
@@ -112,8 +117,8 @@ public class Rq {
 		System.out.println("A 호출됨!");
 		runB();
 	}
-	
+
 	public void runB() {
-		System.out.println("B 호출됨!");	
+		System.out.println("B 호출됨!");
 	}
 }

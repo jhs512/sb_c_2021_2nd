@@ -28,7 +28,7 @@
   <header>
     <div class="h-20 flex container mx-auto">
       <a href="/" class="flex items-center px-3">
-        <span>로고</span>
+        <span>데브 스페셜</span>
       </a>
 
       <div class="flex-grow"></div>
@@ -54,14 +54,14 @@
             <span>자유 게시판</span>
           </a>
         </li>
-        <c:if test="${!rq.isLogined()}">
+        <c:if test="${!rq.logined}">
         <li>
-          <a class="h-full flex px-3 items-center hover:underline" href="/usr/member/login">
+          <a class="h-full flex px-3 items-center hover:underline" href="${rq.loginUri}">
             <span>로그인</span>
           </a>
         </li>
         </c:if>
-        <c:if test="${rq.isLogined()}">
+        <c:if test="${rq.logined}">
         <li>
           <a class="h-full flex px-3 items-center hover:underline" href="/usr/member/myPage">
             <span>${rq.loginedMember.nickname}'s Profile</span>

@@ -96,7 +96,7 @@
   }
 
   function checkLoginIdDup(el) {
-    $('.loginId-message').empty();
+    $('.loginId-message').html('<div class="mt-2">체크중..</div>');
     const form = $(el).closest('form').get(0);
 
     if (form.loginId.value.length == 0) {

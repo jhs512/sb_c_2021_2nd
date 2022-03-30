@@ -25,6 +25,16 @@ html>body, html>body .toastui-editor-contents, html>body .ProseMirror,
   padding: 10px;
 }
 
+html[data-theme="dark"] :is(.table-box-type-1>table th, .table-box-type-1>table td) {
+  border-color:white;
+}
+
+html > body .toast-ui-viewer {
+  background-color:white;
+  padding:10px;
+  border-radius:10px;
+}
+
 .btn-text-link {
   color: skyblue;
 }
@@ -36,4 +46,16 @@ html>body, html>body .toastui-editor-contents, html>body .ProseMirror,
 /* 커스텀 */
 body {
   min-width: 800px;
+}
+
+.btn-theme-toggle > span:first-child {
+  display:none;
+}
+
+html[data-theme="dark"] .btn-theme-toggle > span:first-child {
+  display:inline;
+}
+
+html[data-theme="dark"] .btn-theme-toggle > span:last-child {
+  display:none;
 }

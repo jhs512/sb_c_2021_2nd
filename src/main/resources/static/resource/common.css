@@ -30,9 +30,7 @@ html[data-theme="dark"] :is(.table-box-type-1>table th, .table-box-type-1>table 
 }
 
 html > body .toast-ui-viewer {
-  background-color:white;
-  padding:10px;
-  border-radius:10px;
+
 }
 
 .btn-text-link {

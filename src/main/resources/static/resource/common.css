@@ -21,12 +21,12 @@ html>body, html>body .toastui-editor-contents, html>body .ProseMirror,
 }
 
 .table-box-type-1>table th, .table-box-type-1>table td {
-  border: 1px solid black;
+  border: 1px solid rgba(31, 41, 55, 0.2);
   padding: 10px;
 }
 
 html[data-theme="dark"] :is(.table-box-type-1>table th, .table-box-type-1>table td) {
-  border-color:white;
+  border-color:rgba(166, 173, 186, 0.2);
 }
 
 html > body .toast-ui-viewer {

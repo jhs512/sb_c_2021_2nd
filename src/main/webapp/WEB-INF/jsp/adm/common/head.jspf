@@ -27,4 +27,9 @@
 
 <body>
   <h1 class="container mx-auto">${pageTitle}</h1>
+  <div class="container mx-auto">
+    <a href="${rq.logoutUri}">
+      <span>로그아웃</span>
+    </a>
+  </div>
   <hr />

@@ -106,6 +106,13 @@ Theme__init();
             <span>${rq.loginedMember.nickname}'s Profile</span>
           </a>
         </li>
+        <c:if test="${rq.admin}">
+        <li>
+          <a class="h-full flex px-3 items-center hover:underline" href="/adm/member/list">
+            <span class="text-blue-400">관리자</span>
+          </a>
+        </li>
+        </c:if>
         <li>
           <a class="h-full flex px-3 items-center hover:underline" href="${rq.logoutUri}">
             <span>로그아웃</span>

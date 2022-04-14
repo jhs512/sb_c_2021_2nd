@@ -1,9 +1,12 @@
 package com.sbs.exam.demo.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.sbs.exam.demo.repository.MemberRepository;
 import com.sbs.exam.demo.util.Ut;
+import com.sbs.exam.demo.vo.Article;
 import com.sbs.exam.demo.vo.Member;
 import com.sbs.exam.demo.vo.ResultData;
 
@@ -15,6 +18,17 @@ public class MemberService {
 	public MemberService(AttrService attrService, MemberRepository memberRepository) {
 		this.attrService = attrService;
 		this.memberRepository = memberRepository;
+	}
+
+	public List<Member> getForPrintMembers(int authLevel, String searchKeywordTypeCode, String searchKeyword,
+			int itemsCountInAPage, int page) {
+		int limitStart = (page - 1) * itemsCountInAPage;
+		int limitTake = itemsCountInAPage;
+
+		List<Member> members = memberRepository.getForPrintMembers(authLevel, searchKeywordTypeCode, searchKeyword,
+				limitStart, limitTake);
+
+		return members;
 	}
 
 	public ResultData<Integer> join(String loginId, String loginPw, String name, String nickname, String cellphoneNo,
@@ -60,19 +74,24 @@ public class MemberService {
 
 	public String genMemberModifyAuthKey(int actorId) {
 		String memberModifyAuthKey = Ut.getTempPassword(10);
-		
-		attrService.setValue("member", actorId, "extra", "memberModifyAuthKey", memberModifyAuthKey, Ut.getDateStrLater(60 * 5));
-		
+
+		attrService.setValue("member", actorId, "extra", "memberModifyAuthKey", memberModifyAuthKey,
+				Ut.getDateStrLater(60 * 5));
+
 		return memberModifyAuthKey;
 	}
 
 	public ResultData checkMemberModifyAuthKey(int actorId, String memberModifyAuthKey) {
 		String saved = attrService.getValue("member", actorId, "extra", "memberModifyAuthKey");
-		
-		if ( !saved.equals(memberModifyAuthKey) ) {
+
+		if (!saved.equals(memberModifyAuthKey)) {
 			return ResultData.from("F-1", "일치하지 않거나 만료되었습니다.");
 		}
-		
+
 		return ResultData.from("S-1", "정상적인 코드입니다.");
+	}
+
+	public int getMembersCount(int authLevel, String searchKeywordTypeCode, String searchKeyword) {
+		return memberRepository.getMembersCount(authLevel, searchKeywordTypeCode, searchKeyword);
 	}
 }

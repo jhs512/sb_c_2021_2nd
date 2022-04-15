@@ -36,15 +36,16 @@
     <div class="mt-3">
       <table class="table table-fixed w-full">
         <colgroup>
-          <col />
-          <col />
-          <col />
-          <col />
-          <col />
-          <col />
+          <col width="100" />
+          <col width="100" />
+          <col width="120" />
+          <col width="120" />
         </colgroup>
         <thead>
           <tr>
+            <th>
+              <input class="checkbox-all-member-id" type="checkbox" />
+            </th>
             <th>번호</th>
             <th>가입날짜</th>
             <th>갱신날짜</th>
@@ -56,6 +57,9 @@
         <tbody>
           <c:forEach var="member" items="${members}">
             <tr>
+              <th>
+                <input class="checkbox-member-id" value="${member.id}" type="checkbox" />
+              </th>
               <th>${member.id}</th>
               <td>${member.forPrintType1RegDate}</td>
               <td>${member.forPrintType1UpdateDate}</td>
@@ -67,6 +71,24 @@
         </tbody>
       </table>
     </div>
+
+    <script>
+    $('.checkbox-all-member-id').change(function() {
+      const $all = $(this);
+      const allChecked = $all.prop('checked');
+
+      $('.checkbox-member-id').prop('checked', allChecked);
+    });
+
+    $('.checkbox-member-id').change(function() {
+      const checkboxMemberIdCount = $('.checkbox-member-id').length;
+      const checkboxMemberIdCheckedCount = $('.checkbox-member-id:checked').length;
+
+      const allChecked = checkboxMemberIdCount == checkboxMemberIdCheckedCount;
+
+      $('.checkbox-all-member-id').prop('checked', allChecked);
+    });
+    </script>
 
     <div class="page-menu mt-3">
       <div class="btn-group justify-center">

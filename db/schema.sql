@@ -305,3 +305,14 @@ ALTER TABLE `attr` ADD INDEX (`relTypeCode`, `typeCode`, `type2Code`);
 
 # attr에 만료날짜 추가
 ALTER TABLE `attr` ADD COLUMN `expireDate` DATETIME NULL AFTER `value`;
+
+# 회원 대량 생성
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = UUID(),
+loginPw = 'user2',
+`name` = '사용자2',
+nickname = '사용자2',
+cellphoneNo = '01011111111',
+email = 'jangka512@gmail.com';
